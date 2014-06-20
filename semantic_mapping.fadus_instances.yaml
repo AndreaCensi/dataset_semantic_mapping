@@ -1,6 +1,0 @@
-- id: smap_all
-  desc: All logs from the semantic mapping dataset.
-  code: 
-  - fadus.library.SimpleInstance
-  - logs:
-    - "smap_*"

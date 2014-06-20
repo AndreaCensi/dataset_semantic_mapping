@@ -1,7 +1,7 @@
-- id: "smap_${date}"
+- id: "smap_orig_${date}"
   desc: "Semantic Mapping Dataset ${date}"
   code:
-    - rawlogs_ros.ROSLog
+    - rawlogs_ros.ROSLogTF
     - "file:filename": "semantic_mapping/${date}.bag"
       annotations: 
         robot: 
@@ -17,6 +17,21 @@
           disturbances: []
         notes: | 
             Semantic Mapping Dataset.
+      tf_signals:
+        pose:
+          parent: '/map'
+          child: '/odom_combined'
+
+- id: "smap_${date}"
+  desc: "Filtered semantic map dataset"
+  code: 
+  - rawlogs_filters.ProcgraphFilter
+  - rawlog: "smap_orig_${date}"
+    model: [procgraph_robotics.vel_from_SE3_seq, {}]
+    inputs: # log signal -> model input
+      pose: pose
+    outputs: # model output -> new log signal
+      velocity: velocity
 
 
 - id: "smap_2011-08-03-16-16-43"
