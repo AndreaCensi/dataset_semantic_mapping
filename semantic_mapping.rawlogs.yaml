@@ -19,8 +19,10 @@
             Semantic Mapping Dataset.
       tf_signals:
         pose:
-          parent: '/map'
-          child: '/odom_combined'
+          # parent: '/map'
+          # child: '/odom_combined'
+          parent: '/odom_combined'
+          child: '/base_footprint'
 
 - id: "smap_${date}"
   desc: "Filtered semantic map dataset"
